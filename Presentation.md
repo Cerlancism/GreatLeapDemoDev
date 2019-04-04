@@ -111,6 +111,13 @@ console.log(variableOutofNoWhere)
 
 ```
 
+```javascript {cmd="node"}
+function test()
+{
+    console.log("Hello")
+}
+```
+
 ### ES 6+
 
 ```javascript {cmd="node"}
