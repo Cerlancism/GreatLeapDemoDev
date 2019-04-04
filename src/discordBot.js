@@ -12,6 +12,7 @@ class DiscordBot
     withServer(server)
     {
         this.server = server
+        return this
     }
 }
 
