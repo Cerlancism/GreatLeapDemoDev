@@ -8,8 +8,7 @@ class DiscordBot
     {
         console.log("Starting Discord Bot.")
 
-        this.bot = new Eris.CommandClient(process.env.TOKEN, {}, { prefix: ["@mention ", "."] })
-
+        this.bot = new Eris.CommandClient(process.env.TOKEN, {}, { prefix: ["@mention ", "."], owner: "Cerlancism CY" })
         this.bot.on("ready", () => this.onReady());
         this.bot.registerCommand("ping", async (msg, args) =>
         {
@@ -46,11 +45,24 @@ class DiscordBot
      * 
      * @param {string} message 
      */
-    async sendConfession(message)
+    async sendConfession(title, message, image)
     {
+        console.log(arguments)
         if (this.ready)
         {
-            this.bot.createMessage(DefaultChannel, { content: "**New Confession:**\n" + message })
+            await this.bot.createMessage(DefaultChannel,
+                {
+                    content: "**New Confession**\n",
+                    embed:
+                    {
+                        title: title,
+                        description: message,
+                        image:
+                        {
+                            url: image
+                        }
+                    }
+                })
         }
     }
 

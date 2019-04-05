@@ -10,9 +10,17 @@
 
 <body>
     <form id="accessForm">
-        Yout confession:
+        Title (Optional)
         <br>
-        <textarea id="content" rows="10" cols="30"></textarea>
+        <textarea id="ConfessionTitle" rows="1" cols="30"></textarea>
+        <br>
+        Your confession:
+        <br>
+        <textarea id="ConfessionContent" rows="10" cols="30"></textarea>
+        <br>
+        ImageURL (optional):
+        <br>
+        <textarea id="ConfessionImage" rows="1" cols="30"></textarea>
         <br>
         <br>
         <input id="submitBtn" type="submit" value="Submit">
@@ -27,10 +35,14 @@
             /**
             * @type {HTMLTextAreaElement}
             */
-            const field = document.getElementById("content")
+            const field = document.getElementById("ConfessionContent")
+            const imageField = document.getElementById("ConfessionImage");
+            const titleField = document.getElementById("ConfessionTitle")
             const content = field.value
+            const imageLink = imageField.value
+            const title = titleField.value
 
-            fetch(`./confess/${content}`, { method: "GET" })
+            fetch(`./confess?title=${title}&content=${content}&image=${imageLink}`)
 
             const p = document.createElement("p")
             p.innerHTML = "You confessed: " + content
