@@ -62,7 +62,7 @@ var bool = false
 var arrayEmpty = []
 var arrayNumbers = [1, 2, 3, 4]
 
-var _, _01234, __, $
+// var _, _01234, __, $;
 ```
 ##### Dynamic
 ```javascript {cmd="node"}
