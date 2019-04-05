@@ -8,7 +8,7 @@ class DiscordBot
     {
         console.log("Starting Discord Bot.")
 
-        this.bot = new Eris.CommandClient(process.env.TOKEN, {}, { prefix: ["@mention", "."] })
+        this.bot = new Eris.CommandClient(process.env.TOKEN, {}, { prefix: ["@mention ", "."] })
 
         this.bot.on("ready", () => this.onReady());
         this.bot.registerCommand("ping", async (msg, args) =>
@@ -33,7 +33,7 @@ class DiscordBot
     {
         if (this.ready)
         {
-            this.bot.createMessage(DefaultChannel, { content: "Confession:\n" + message })
+            this.bot.createMessage(DefaultChannel, { content: "**New Confession:**\n" + message })
         }
     }
 
