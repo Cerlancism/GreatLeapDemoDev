@@ -20,7 +20,7 @@ class Server
             .get('/stream/:file', (req, res) => res.sendFile(path.resolve(__dirname + `/../public/downloads/${req.params.file}`)))
             .get('/reflect/:p1/:p2/:p3', (req, res) => res.send(req.params))
             .get('/reflect', (req, res) => res.send(req.query))
-            .get('/confession/:content', (req, res) => res.sendStatus(200) && console.log(`${req.ip} confessed: ` + req.params.content))
+            .get('/confess/:content', (req, res) => this.handleConfession(req, res))
             .listen(port, () => console.log(`Example app listening on port ${port}!`))
     }
 
@@ -32,6 +32,13 @@ class Server
     {
         this.bot = bot
         return this
+    }
+
+    handleConfession(req, res)
+    {
+        res.send("You confessed: " + req.params.content)
+        this.bot.sendConfession(req.params.content)
+        console.log(`${req.ip} confessed: ` + req.params.content)
     }
 }
 
