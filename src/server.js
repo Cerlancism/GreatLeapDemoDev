@@ -2,6 +2,7 @@
 const express = require('express')
 const serveIndex = require('serve-index');
 const path = require('path')
+const http = require('http')
 
 class Server
 {
@@ -22,6 +23,13 @@ class Server
             .get('/reflect', (req, res) => res.send(req.query))
             .get('/confess', (req, res) => this.handleConfession(req, res))
             .listen(port, () => console.log(`Example app listening on port ${port}!`))
+
+        setInterval(() =>
+        {
+            http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
+        }, 280000);
+
+        console.log(`Project hosted at: http://${process.env.PROJECT_DOMAIN}.glitch.me/`)
     }
 
     /**
