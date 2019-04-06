@@ -34,6 +34,11 @@ class Server
         return this
     }
 
+    /**
+     * 
+     * @param {import("express").Request} req 
+     * @param {import("express").Response} res
+     */
     handleConfession(req, res)
     {
         res.send("You confessed: " + req.query.content)

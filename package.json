@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Cerlancism/GreatLeapDemo.git"
+    "url": "git+https://github.com/Cerlancism/GreatLeapDemoDev.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Cerlancism/GreatLeapDemo/issues"
+    "url": "https://github.com/Cerlancism/GreatLeapDemoDev/issues"
   },
-  "homepage": "https://github.com/Cerlancism/GreatLeapDemo#readme",
+  "homepage": "https://github.com/Cerlancism/GreatLeapDemoDev#readme",
   "dependencies": {
     "dotenv": "^7.0.0",
     "eris": "^0.9.0",
