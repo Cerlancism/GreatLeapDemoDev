@@ -1,6 +1,6 @@
 const Eris = require('eris')
 
-const ConfessionChannel = "382566156504137728"
+const ConfessionChannel = "563592900168908821"
 
 class DiscordBot
 {
