@@ -26,7 +26,8 @@ class Server
 
         setInterval(() =>
         {
-            http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
+            http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`)
+            console.log("Persistence ping")
         }, 280000);
 
         console.log(`Project hosted at: http://${process.env.PROJECT_DOMAIN}.glitch.me/`)
