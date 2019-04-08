@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Confession</title>
+</head>
+
+<body>
+    <form id="accessForm">
+        Title (optional)
+        <br>
+        <textarea id="ConfessionTitle" rows="1" cols="30"></textarea>
+        <br>
+        Your confession:
+        <br>
+        <textarea id="ConfessionContent" rows="10" cols="30"></textarea>
+        <br>
+        ImageURL (optional):
+        <br>
+        <textarea id="ConfessionImage" rows="1" cols="30"></textarea>
+        <br>
+        <br>
+        <input id="submitBtn" type="submit" value="Submit">
+    </form>
+
+    <script>
+        const form = document.getElementById("accessForm")
+        form.addEventListener("submit", (e) =>
+        {
+            e.preventDefault();
+
+            /**
+            * @type {HTMLTextAreaElement}
+            */
+            const field = document.getElementById("ConfessionContent")
+            const imageField = document.getElementById("ConfessionImage");
+            const titleField = document.getElementById("ConfessionTitle")
+            const content = field.value
+            const imageLink = imageField.value
+            const title = titleField.value
+
+            fetch(`./confess?title=${title}&content=${content}&image=${imageLink}`)
+
+            const p = document.createElement("p")
+            p.innerHTML = "You confessed: " + content
+            document.body.appendChild(p)
+
+            form.style.display = "none"
+        })
+    </script>
+
+</body>
+
+</html>
