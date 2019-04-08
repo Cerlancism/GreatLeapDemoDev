@@ -4,6 +4,9 @@ const serveIndex = require('serve-index');
 const path = require('path')
 const http = require('http')
 
+/**
+ * Wrapper for express server
+ */
 class Server
 {
     constructor(port = 8080)
