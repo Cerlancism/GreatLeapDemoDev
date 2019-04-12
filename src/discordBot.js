@@ -110,9 +110,7 @@ function* encapselatedLies(messsage, target, wrapper = "**")
     {
         if (char === targetChar)
         {
-            yield wrapper
-            yield char
-            yield wrapper
+            yield "[" + wrapper + char + wrapper + "]"
             targetChar = targetArr.shift()
             continue
         }

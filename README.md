@@ -7,6 +7,7 @@ Low effort quick demostration of modern JavaScript development for experienced g
 Proof of concept coding style, do not take hard reference. Do read proper language specification, framework and library documentations.
 
 ### Recommendations
+- The Rabbit Hole <https://github.com/kamranahmedse/developer-roadmap>
 - JavaScript <https://developer.mozilla.org/en-US/docs/Web/JavaScript>
 - MEAN(Mongodb, Express, Angular, NodeJS) Stack <http://mean.io/>
 - Eris Discord Bot <https://abal.moe/Eris/>
