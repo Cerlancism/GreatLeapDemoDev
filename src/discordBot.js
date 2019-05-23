@@ -1,6 +1,6 @@
 const Eris = require('eris')
 
-const ConfessionChannel = "563592900168908821"
+const ConfessionChannel = process.env.CONFESSION_CHANNEL
 
 class DiscordBot
 {
@@ -64,24 +64,50 @@ class DiscordBot
      * @param {string} title 
      * @param {string} message 
      * @param {string} image 
+     * @param {string} text
      */
-    async sendConfession(title, message, image)
+    async sendConfession(title, message, image, text)
     {
         if (this.ready)
         {
-            await this.bot.createMessage(ConfessionChannel,
+            if (text != "")
+            {
+                if ([title, message, image].some(x => x != ""))
                 {
-                    content: "**New Confession**\n",
-                    embed:
-                    {
-                        title: title,
-                        description: message,
-                        image:
+                    await this.bot.createMessage(ConfessionChannel,
                         {
-                            url: image
+                            content: "**New Confession**\n",
+                            embed: {
+                                title: title,
+                                description: message,
+                                image:
+                                {
+                                    url: image
+                                }
+                            }
+                        })
+                }
+
+                await this.bot.createMessage(ConfessionChannel,
+                    {
+                        content: text
+                    })
+            }
+            else
+            {
+                await this.bot.createMessage(ConfessionChannel,
+                    {
+                        content: "**New Confession**\n",
+                        embed: {
+                            title: title,
+                            description: message,
+                            image:
+                            {
+                                url: image
+                            }
                         }
-                    }
-                })
+                    })
+            }
         }
     }
 

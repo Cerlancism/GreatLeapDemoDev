@@ -55,7 +55,7 @@
                     <div class="input-field col s12">
                         <i class="material-icons prefix">chat</i>
                         <textarea id="confession-content" class="materialize-textarea validate" data-length="2048" style="height: 12rem"></textarea>
-                        <label for="confession-content">Your confession</label>
+                        <label for="confession-content">Your confession (optional)</label>
                     </div>
                 </div>
 
@@ -63,7 +63,16 @@
                     <div class="input-field col s12">
                         <i class="material-icons prefix">image</i>
                         <input id="confession-image" type="url" class="validate" data-length="2048" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></input>
-                        <label for="confession-image">ImageURL (optional)</label>
+                        <label for="confession-image">Image URL (optional)</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">insert_link</i>
+                        <input id="confession-url" type="url" class="validate" data-length="2048" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></input>
+                        <label for="confession-url">Plain URL (optional)</label>
+                        <span class="helper-text"> Use this as a preview link such as Youtube and other web pages.</span>
                     </div>
                 </div>
 
@@ -101,7 +110,17 @@
     <div id="modal-warn" class="modal">
         <div class="modal-content">
             <h4>Rejected</h4>
-            <p>All fields are empty!</p>
+            <p>All fields are empty! Please enter at least 1 field.</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Ok</a>
+        </div>
+    </div>
+
+    <div id="modal-warn-image" class="modal">
+        <div class="modal-content">
+            <h4>Rejected</h4>
+            <p>The image url entered is not an image url.</p>
         </div>
         <div class="modal-footer">
             <a href="#!" class="modal-close waves-effect waves-green btn-flat">Ok</a>
@@ -125,22 +144,34 @@
             const titleField = document.getElementById("confession-title")
             const field = document.getElementById("confession-content")
             const imageField = document.getElementById("confession-image");
+            const urlField = document.getElementById("confession-url")
             const title = titleField.value
             const content = field.value
             const imageLink = imageField.value
+            const plainLink = urlField.value
 
-            if ([content, imageLink, title].every(x => x === ""))
+            if ([content, imageLink, title, plainLink].every(x => x == ""))
             {
                 var instance = M.Modal.getInstance(document.getElementById("modal-warn"));
                 instance.open()
                 return
             }
 
-            fetch(`./confess?title=${title}&content=${encodeURIComponent(content)}&image=${imageLink}`)
+            if (imageLink != "")
+            {
+                if (!imageLink.match(/\.(jpeg|jpg|gif|png)$/))
+                {
+                    var instance = M.Modal.getInstance(document.getElementById("modal-warn-image"));
+                    instance.open()
+                    return
+                }
+            }
+
+            fetch(`./confess?title=${title}&content=${encodeURIComponent(content)}&image=${imageLink}&text=${plainLink}`)
                 .then((res) => console.log(res.url))
 
             var feedback = document.getElementById("confession-feedback")
-            feedback.innerHTML = `Title: ${title}<br>Content: ${content}<br> Image: ${imageLink}`
+            feedback.innerHTML = `Title: ${title}<br>Content: ${content}<br> Image: ${imageLink}<br> URL: ${plainLink}`
             var instance = M.Modal.getInstance(document.getElementById("modal-done"));
             instance.open()
         })
