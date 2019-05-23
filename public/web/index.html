@@ -33,16 +33,25 @@
         catch (error)
         {
             console.log(error)
-            alert("Sorry, your old browser is not support on this web application. Error stack:\n" + JSON.stringify(error, undefined, 2))
+            alert("Sorry, this web application does not support this browser. Please use an updated browser. \n\n\nError:\n\n" + error.message + "\n\n\nStack:\n\n" + error.stack)
         }
     </script>
 </head>
 
 <body>
+    <nav>
+        <div class="nav-wrapper teal lighten-2">
+            <a href="#" class="brand-logo center" style="width: 100%;">GD Confessions</a>
+        </div>
+    </nav>
+    <div><br></div>
+    <div><br></div>
     <main class="container">
+
         <div class="row">
+
             <form id="access-form" class="col s12">
-                <h4>GD Confessions</h4>
+
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="material-icons prefix">create</i>
@@ -55,7 +64,7 @@
                     <div class="input-field col s12">
                         <i class="material-icons prefix">chat</i>
                         <textarea id="confession-content" class="materialize-textarea validate" data-length="2048" style="height: 12rem"></textarea>
-                        <label for="confession-content">Your confession (optional)</label>
+                        <label for="confession-content">Your confession</label>
                     </div>
                 </div>
 
@@ -79,6 +88,7 @@
                 <button class="btn waves-effect waves-light" type="submit" name="action">Submit
                     <i class="material-icons right">send</i>
                 </button>
+
             </form>
         </div>
     </main>
@@ -86,13 +96,16 @@
     <footer class="page-footer teal lighten-2">
         <div class="container">
             <div class="row">
-                <p class="grey-text text-lighten-4">Made with <i class="tiny material-icons">favorite</i> in Great Leap Forward v2</p>
+                <p class="col grey-text text-lighten-4">Made with <i class="tiny material-icons">favorite</i> for Great Leap Forward v2</p>
             </div>
         </div>
         <div class="footer-copyright">
             <div class="container">
-                © 2019 Cerlancism
-                <a class="grey-text text-lighten-4 right" href="https://github.com/Cerlancism/GreatLeapDemo">Github</a>
+                <div class="row">
+                    <div class="col">© 2019 Cerlancism</div>
+                    <a class="grey-text text-lighten-4 right" href="https://github.com/Cerlancism/GreatLeapDemo">GitHub</a>
+                </div>
+
             </div>
         </div>
     </footer>
@@ -120,7 +133,17 @@
     <div id="modal-warn-image" class="modal">
         <div class="modal-content">
             <h4>Rejected</h4>
-            <p>The image url entered is not an image url.</p>
+            <p>The image URL entered is not an image URL.</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Ok</a>
+        </div>
+    </div>
+
+    <div id="modal-warn-illegal-character" class="modal">
+        <div class="modal-content">
+            <h4>Rejected</h4>
+            <p>&lt;@ is not allowed to be in a URL</p>
         </div>
         <div class="modal-footer">
             <a href="#!" class="modal-close waves-effect waves-green btn-flat">Ok</a>
@@ -150,14 +173,14 @@
             const imageLink = imageField.value
             const plainLink = urlField.value
 
-            if ([content, imageLink, title, plainLink].every(x => x == ""))
+            if ([content, imageLink, title, plainLink].every(x => !x))
             {
                 var instance = M.Modal.getInstance(document.getElementById("modal-warn"));
                 instance.open()
                 return
             }
 
-            if (imageLink != "")
+            if (imageLink)
             {
                 if (!imageLink.match(/\.(jpeg|jpg|gif|png)$/))
                 {
@@ -167,11 +190,21 @@
                 }
             }
 
+            if (plainLink)
+            {
+                if (plainLink.includes("<@"))
+                {
+                    var instance = M.Modal.getInstance(document.getElementById("modal-warn-illegal-character"));
+                    instance.open()
+                    return
+                }
+            }
+
             fetch(`./confess?title=${title}&content=${encodeURIComponent(content)}&image=${imageLink}&text=${plainLink}`)
                 .then((res) => console.log(res.url))
 
             var feedback = document.getElementById("confession-feedback")
-            feedback.innerHTML = `Title: ${title}<br>Content: ${content}<br> Image: ${imageLink}<br> URL: ${plainLink}`
+            feedback.innerHTML = `Title: ${title}<br>Content: ${content}<br>Image: ${imageLink}<br>URL: ${plainLink}`
             var instance = M.Modal.getInstance(document.getElementById("modal-done"));
             instance.open()
         })

@@ -70,9 +70,10 @@ class DiscordBot
     {
         if (this.ready)
         {
-            if (text != "")
+            if (text)
             {
-                if ([title, message, image].some(x => x != ""))
+                text = text.replace(/\<@/g, "")
+                if ([title, message, image].some(x => x))
                 {
                     await this.bot.createMessage(ConfessionChannel,
                         {
@@ -86,6 +87,14 @@ class DiscordBot
                                 }
                             }
                         })
+                }
+                else
+                {
+                    await this.bot.createMessage(ConfessionChannel,
+                        {
+                            content: "**New Confession**\n" + text
+                        })
+                    return
                 }
 
                 await this.bot.createMessage(ConfessionChannel,
