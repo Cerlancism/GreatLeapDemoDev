@@ -54,7 +54,7 @@ class Server
     handleConfession(req, res)
     {
         res.send("You confessed: " + req.query.content)
-        this.bot.sendConfession(req.query.title, req.query.content, req.query.image)
+        this.bot.sendConfession(req.query.title, decodeURIComponent(req.query.content), req.query.image)
         console.log(`${req.ip} confessed: ` + req.query.content)
     }
 }
