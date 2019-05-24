@@ -1,7 +1,7 @@
 {
   "name": "great-leap-demo",
   "version": "1.0.0",
-  "description": "",
+  "description": "Demo project for a class showcase",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js"
@@ -11,7 +11,7 @@
     "url": "git+https://github.com/Cerlancism/GreatLeapDemoDev.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Cerlancism",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Cerlancism/GreatLeapDemoDev/issues"
